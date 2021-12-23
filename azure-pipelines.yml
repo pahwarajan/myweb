@@ -7,18 +7,14 @@ trigger:
 - main
 
 pool:
-  vmImage: ubuntu-latest
+  name: Default
+  demands:
+   - agent.name -equals blank1
 
 steps:
-- task: ArchiveFiles@2
-  inputs:
-    rootFolderOrFile: '$(build.sourcesDirectory)'
-    includeRootFolder: false
-- task: PublishBuildArtifacts@1
-
 - task: CopyFilesOverSSH@0
   inputs:
     sshEndpoint: 'hiiii'
-    contents: '**'
-    targetFolder: '/var/www/html'
+    contents: '**/*'
+    targetFolder: '/home/ubuntu/'
     readyTimeout: '20000'
